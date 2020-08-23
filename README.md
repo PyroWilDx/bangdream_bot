@@ -9,9 +9,7 @@ I've made a video of the bot playing : ytblink
 
 ### HOW TO USE : 
 #### Setup the game :
-
 1. Install Bang Dream on BlueStacks
-
 
 2. Change your game settings to those ones :
    - **Live Settings :**
@@ -47,7 +45,6 @@ I've made a video of the bot playing : ytblink
      - _Check Battery Level : OFF_
      - _Ad Check : As you want_
      
-     
 3. Download the controls file "bangdream-bot_control.cfg" in this repostery and import it on BlueStacks. To import this file you'll need to :
    - _Open the game on BlueStacks_
    - _Open "Controls editor" (this can be done with CTRL+SHIFT+A)_
@@ -58,4 +55,10 @@ I've made a video of the bot playing : ytblink
 This is all for the game setup.
 
 #### Use the bot :
+1. Download the files : main.py, game.py, setup.py, grabscreen.py, confirm_button.png, live_button.png. Put them all in the same folder.
 
+2. Open Bang Dream on BlueStacks and go to the Home Screen of the game (where we see the characters talking)
+
+3. Make sure you can see BlueStacks on the foreground of your screen. Execute the "main.py" script on your cmd or with your IDE.
+
+4. Now just follow the next little things the script asks you (entering 1 or 2 ; setting up BlueStacks screen etc...) and the bot will play itself !
