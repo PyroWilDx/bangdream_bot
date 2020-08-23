@@ -55,7 +55,7 @@ I've made a video of the bot playing : ytblink
 This is all for the game setup.
 
 #### Use the bot :
-1. Download the files : main.py, game.py, setup.py, grabscreen.py, confirm_button.png, live_button.png. Put them all in the same folder.
+1. Download the files in this repostery : main.py, game.py, setup.py, grabscreen.py, confirm_button.png, live_button.png. Put them all in the same folder.
 
 2. Open Bang Dream on BlueStacks and go to the Home Screen of the game (where we see the characters talking)
 
