@@ -7,7 +7,7 @@ This is a Python bot that can help you farm in the game "BanG Dream! Girls Band 
 3. A computer that can run the game with at least 40 FPS on BlueStacks, its dimension should be greater than 1000x570 pixels
 
 ### HOW TO USE : 
-##### Setup the game :
+#### Setup the game :
 1. Install Bang Dream on BlueStacks
 2. Change your game settings to those ones :
    - **Live Settings :**
