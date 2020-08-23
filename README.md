@@ -9,7 +9,9 @@ I've made a video of the bot playing : ytblink
 
 ### HOW TO USE : 
 #### Setup the game :
+
 1. Install Bang Dream on BlueStacks
+
 
 2. Change your game settings to those ones :
    - **Live Settings :**
@@ -45,13 +47,15 @@ I've made a video of the bot playing : ytblink
      - _Check Battery Level : OFF_
      - _Ad Check : As you want_
      
+     
 3. Download the controls file "bangdream-bot_control.cfg" in this repostery and import it on BlueStacks. To import this file you'll need to :
    - _Open the game on BlueStacks_
-   - Open "Controls editor" (this can be done with CTRL+SHIFT+A)_
+   - _Open "Controls editor" (this can be done with CTRL+SHIFT+A)_
    - _On the top right corner of the editor click on the import button_
    - _Select the downloaded file and click on open_
    - _A new window named "Import schemes" should open, click on "Select all" and then on "Import"_
    
 This is all for the game setup.
 
-####
+#### Use the bot :
+
