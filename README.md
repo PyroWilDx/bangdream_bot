@@ -62,3 +62,7 @@ This is all for the game setup.
 3. Make sure you can see BlueStacks on the foreground of your screen. Execute the "main.py" script on your cmd or with your IDE.
 
 4. Now just follow the next little things the script asks you (entering 1 or 2 ; setting up BlueStacks screen etc...) and the bot will play itself !
+
+5. You can also modify the scripts if you can understand my shit spaghetti code to make the bot better
+
+***Please tell me if you have any problem or suggestion (my disocrd is PyroWilDx#9745)***
