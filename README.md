@@ -13,31 +13,31 @@ I've made a video of the bot playing : ytblink
 
 2. Change your game settings to those ones :
    - **Live Settings :**
-     - Note Speed : Depends on your computer (I think it should be between 1.0 and 7.0, try it yourself after finishing the setup and see which speed works the best. I personally use the bot with 3.0 note speed)
-     - Note Size : 150%
-     - Song Adjustement : As you want
-     - Long Note Transparency : 100%
-     - Dual Tap Line : OFF
-     - Off-Beat Coloring : OFF
-     - Mirror : OFF
-     - Lane Effects : OFF
+     - _Note Speed : Depends on your computer (I think it should be between 1.0 and 7.0, try it yourself after finishing the setup and see which speed works the best. I personally use the bot with 3.0 note speed)_
+     - _Note Size : 150%_
+     - _Song Adjustement : As you want_
+     - _Long Note Transparency : 100%_
+     - _Dual Tap Line : OFF_
+     - _Off-Beat Coloring : OFF_
+     - _Mirror : OFF_
+     - _Lane Effects : OFF_
    - **Effect & Sound Settings :**
-     - Control Mode : LO
-     - Fever Effect : LO
-     - Memver Cut-in : LO
-     - Skill Window : OFF
-     - Skill Effect Text : OFF
-     - Playback Quality : LO
-     - Live Mode Quality : LO
-     - Live Mode Brightness : 50%
-     - Music Video Live Memver Cut-ins : OFF
-     - Live Volume : As you want
+     - _Control Mode : LO_
+     - _Fever Effect : LO_
+     - _Memver Cut-in : LO_
+     - _Skill Window : OFF_
+     - _Skill Effect Text : OFF_
+     - _Playback Quality : LO_
+     - _Live Mode Quality : LO_
+     - _Live Mode Brightness : 50%_
+     - _Music Video Live Memver Cut-ins : OFF_
+     - _Live Volume : As you want_
    - **Live Theme Settings :**
-     - Lane Design : 5
-     - Tap Effects : 5
-     - Event Live Background : OFF
-     - Note : TYPE3
-     - SE : As you want
+     - _Lane Design : 5_
+     - _Tap Effects : 5_
+     - _Event Live Background : OFF_
+     - _Note : TYPE3_
+     - _SE : As you want_
    - **System & Push Settings :**
      - _System Volume : As you want_
      - _Fix Screen : OFF_
