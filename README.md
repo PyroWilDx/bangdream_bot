@@ -9,6 +9,7 @@ This is a Python bot that can help you farm in the game "BanG Dream! Girls Band 
 ### HOW TO USE : 
 #### Setup the game :
 1. Install Bang Dream on BlueStacks
+
 2. Change your game settings to those ones :
    - **Live Settings :**
      - Note Speed : Depends on your computer (I think it should be between 1.0 and 7.0, try it yourself and see which one works the best. I personally use the bot with 3.0 note speed)
@@ -40,7 +41,8 @@ This is a Python bot that can help you farm in the game "BanG Dream! Girls Band 
      - Shortage Check : OFF
      - Check Battery Level : OFF
      - Ad Check : As you want
-3. Download the controls file "bangdream-bot_control.cfg" in this reposteries and import it on BlueStacks. To import this file you'll need to :
+     
+3. Download the controls file "bangdream-bot_control.cfg" in this repostery and import it on BlueStacks. To import this file you'll need to :
    - Open the game on BlueStacks
    - Open "Controls editor" (this can be done with CTRL+SHIFT+A)
    - On the top right corner of the editor click on the "import" button
