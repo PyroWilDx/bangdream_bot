@@ -5,7 +5,7 @@ I've made a video of the bot playing : https://youtu.be/rOcxnC_ip68
 ### REQUIREMENTS :
 1. Python 3.x (python libraries requirement : opencv-python; numpy; win32gui; keyboard; pyautogui)
 2. BlueStacks (other emulators won't work)
-3. A windows computer that can run the game with at least 40 FPS on BlueStacks (the dimensions of your screen must be greater than 1000x570 pixels) with a decent internet connection.
+3. a Windows computer that can run the game with at least 40 FPS on BlueStacks (the dimensions of your screen must be greater than 1000x570 pixels) with a decent internet connection.
 
 ### HOW TO USE : 
 #### Setup the game :
