@@ -4,7 +4,7 @@ I've made a video of the bot playing : https://youtu.be/rOcxnC_ip68
 
 ### REQUIREMENTS :
 1. Python 3.x (python libraries requirement : opencv-python; numpy; win32gui; keyboard; pyautogui)  
-If you're new to Python see how to install it on [this video](https://www.youtube.com/watch?v=bnhQBUEpWlg). After the installation, download the libraries with the command *pip install library_name* in the cmd (ex : pip install opencv-python)
+(If you're new to Python : see how to install it on [this video](https://www.youtube.com/watch?v=bnhQBUEpWlg). After the installation, download the libraries with the command *pip install library_name* in the cmd (ex : *pip install opencv-python*))
 
 2. BlueStacks (other emulators won't work)
 
@@ -58,11 +58,12 @@ If you're new to Python see how to install it on [this video](https://www.youtub
 This is all for the game setup.
 
 #### Use the bot :
-1. Download the files in this repostery : [main.py](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/main.py); [setup.py](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/setup.py); [grabscreen.py](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/grabscreen.py); [confirm_button.png](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/confirm_button.png); [live_button.png](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/live_button.PNG); and put them all in the same folder. You can directly download all the files here : https://github.com/PyroWilDx/bangdream-bot/archive/master.zip
+1. Download the files in this repostery : [main.py](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/main.py); [setup.py](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/setup.py); [grabscreen.py](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/grabscreen.py); [confirm_button.png](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/confirm_button.png); [live_button.png](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/live_button.PNG); and put them all in the same folder. You can directly download all the files here : https://github.com/PyroWilDx/bangdream-bot/archive/master.zip (don't forget to extract the files)
 
 2. Open Bang Dream on BlueStacks and go to the Home Screen of the game (where we see the characters talking)
 
-3. Make sure you can see BlueStacks on the foreground of your screen. Execute the "main.py" script on the cmd or with your IDE.
+3. Make sure you can see BlueStacks on the foreground of your screen. Execute the [main.py](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/main.py) script on the cmd or with your IDE.  
+(If you're new to Python : you can run a python file by using the command *py file_path/file.py* in the cmd (ex : *py C:\Users\USER_NAME\Downloads\bangdream-bot-master\bangdream-bot-master\bot\main.py*) ```test```
 
 4. Now just follow the next little things the script asks you (entering 1 or 2 ; setting up BlueStacks screen etc...) and the bot will play itself !
 
