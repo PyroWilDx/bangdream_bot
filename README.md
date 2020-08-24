@@ -63,7 +63,7 @@ This is all for the game setup.
 2. Open Bang Dream on BlueStacks and go to the Home Screen of the game (where we see the characters talking)
 
 3. Make sure you can see BlueStacks on the foreground of your screen. Execute the [main.py](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/main.py) script on the cmd or with your IDE.  
-(If you're new to Python : you can run a python file by using the command ```py file_path/file.py``` in the cmd (ex : ```py C:\Users\USER_NAME\Downloads\bangdream-bot-master\bangdream-bot-master\bot\main.py```) 
+(If you're new to Python : you can run a python file by using the command ```py file_path\file.py``` in the cmd (ex : ```py C:\Users\USER_NAME\Downloads\bangdream-bot-master\bangdream-bot-master\bot\main.py```) 
 
 4. Now just follow the next little things the script asks you (*entering 1 or 2 ; setting up BlueStacks screen etc...*) and the bot will play itself !
 
