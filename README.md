@@ -5,7 +5,7 @@ I've made a video of the bot playing : https://youtu.be/rOcxnC_ip68
 ### REQUIREMENTS :
 1. Python 3.x (python libraries requirement : opencv-python; numpy; win32gui; keyboard; pyautogui)
 2. BlueStacks (other emulators won't work)
-3. A computer that can run the game with at least 40 FPS on BlueStacks, the dimensions of your screen must be greater than 1000x570 pixels.
+3. A computer that can run the game with at least 40 FPS on BlueStacks (the dimensions of your screen must be greater than 1000x570 pixels) with a decent internet connection.
 
 ### HOW TO USE : 
 #### Setup the game :
@@ -49,7 +49,7 @@ I've made a video of the bot playing : https://youtu.be/rOcxnC_ip68
    - _Open the game on BlueStacks_
    - _Open "Controls editor" (this can be done with CTRL+SHIFT+A)_
    - _On the top right corner of the editor click on the import button_
-   - _Select the downloaded file and click on open_
+   - _Open the downloaded file_
    - _A new window named "Import schemes" should open, click on "Select all" and then on "Import"_
    
 This is all for the game setup.
