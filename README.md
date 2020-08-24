@@ -3,9 +3,9 @@ This is a Python bot that can help you farm in the game "BanG Dream! Girls Band 
 I've made a video of the bot playing : https://youtu.be/rOcxnC_ip68
 
 ### REQUIREMENTS :
-1. Python 3.x (python libraries requirement : opencv-python, numpy, win32gui, keyboard, pyautogui)
+1. Python 3.x (python libraries requirement : opencv-python; numpy; win32gui; keyboard; pyautogui)
 2. BlueStacks (other emulators won't work)
-3. A computer that can run the game with at least 40 FPS on BlueStacks, its dimension should be greater than 1000x570 pixels
+3. A computer that can run the game with at least 40 FPS on BlueStacks, the dimensions of your screen must be greater than 1000x570 pixels.
 
 ### HOW TO USE : 
 #### Setup the game :
@@ -55,14 +55,14 @@ I've made a video of the bot playing : https://youtu.be/rOcxnC_ip68
 This is all for the game setup.
 
 #### Use the bot :
-1. Download the files in this repostery : main.py, game.py, setup.py, grabscreen.py, confirm_button.png, live_button.png. Put them all in the same folder.
+1. Download the files in this repostery : main.py; setup.py; grabscreen.py; confirm_button.png; live_button.png; Put them all in the same folder.
 
 2. Open Bang Dream on BlueStacks and go to the Home Screen of the game (where we see the characters talking)
 
-3. Make sure you can see BlueStacks on the foreground of your screen. Execute the "main.py" script on your cmd or with your IDE.
+3. Make sure you can see BlueStacks on the foreground of your screen. Execute the "main.py" script on the cmd or with your IDE.
 
 4. Now just follow the next little things the script asks you (entering 1 or 2 ; setting up BlueStacks screen etc...) and the bot will play itself !
 
-5. You can also modify the scripts if you can understand my shit spaghetti code to make the bot better
+5. You can also modify the scripts if you can understand my shit spaghetti code to make the bot better xd.
 
 ***Please tell me if you have any problem or suggestion (my disocrd is PyroWilDx#9745)***
