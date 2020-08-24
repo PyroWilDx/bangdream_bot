@@ -1,6 +1,6 @@
 # Bang Dream - Bot
 This is a Python bot that can help you farm in the game "BanG Dream! Girls Band Party", it can play most of the easy and normal songs.
-I've made a video of the bot playing : ytblink
+I've made a video of the bot playing : https://youtu.be/rOcxnC_ip68
 
 ### REQUIREMENTS :
 1. Python 3.x (python libraries requirement : opencv-python, numpy, win32gui, keyboard, pyautogui)
@@ -45,7 +45,7 @@ I've made a video of the bot playing : ytblink
      - _Check Battery Level : OFF_
      - _Ad Check : As you want_
      
-3. Download the controls file "bangdream-bot_control.cfg" in this repostery and import it on BlueStacks. To import this file you'll need to :
+3. Download the [controls file](https://github.com/PyroWilDx/bangdream-bot/blob/master/bangdream-bot_control.cfg) in this repostery and import it on BlueStacks. To import this file you'll need to :
    - _Open the game on BlueStacks_
    - _Open "Controls editor" (this can be done with CTRL+SHIFT+A)_
    - _On the top right corner of the editor click on the import button_
