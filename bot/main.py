@@ -66,9 +66,6 @@ def play():
     KEY_LIST_MAIN = ['f', 'g', 'h']
     KEY_LIST_SECOND = ['v', 'b', 'n']
 
-    SLIDE_SLEEP_DURATION = 0.12
-    AFTER_PRESS_SLEEP_DURATION = 0.04
-
     NOTE_LOW_RANGE = np.array([169, 74, 255])  # 169, 74, 255
     NOTE_UP_RANGE = np.array([169, 74, 255])
     SKILL_LOW_RANGE = np.array([91, 128, 255])  # 91, 128, 255
@@ -84,7 +81,7 @@ def play():
     last_time = time.time()
 
     while True:
-        screen_main = grab_screen(region=(120, 470, 820, 500))
+        screen_main = grab_screen(region=(120, 472, 820, 500))
         screen_main = cv2.cvtColor(screen_main, cv2.COLOR_BGR2HSV)
 
         screens_list = [screen_main[:, 0:270], screen_main[:, 320:380], screen_main[:, 430:700]]
@@ -102,7 +99,7 @@ def play():
             if all(value <= 2 for value in index_nonZero_list):
                 for i in index_nonZero_list:
                     press_and_release(KEY_LIST_MAIN[i])
-                time.sleep(AFTER_PRESS_SLEEP_DURATION)
+                time.sleep(0.04)
             elif all(value >= 9 for value in index_nonZero_list):
                 time.sleep(0.06)
                 for i in index_nonZero_list:
@@ -115,18 +112,22 @@ def play():
                 middle_slide = False
                 two_slide = False
                 x = (120, 820)
+                start_time = time.time()
                 while True:
-                    screen = grab_screen(region=(150, 388, 790, 400))
+                    screen = grab_screen(region=(150, 380, 790, 400))
                     screen = cv2.cvtColor(screen, cv2.COLOR_BGR2HSV)
                     mask_slide_line = cv2.inRange(screen, SLIDE_LINE_LOW_RANGE, SLIDE_LINE_UP_RANGE)
                     slide_line_nonZero = cv2.findNonZero(mask_slide_line)
                     if slide_line_nonZero is None:
-                        time.sleep(SLIDE_SLEEP_DURATION)
+                        if time.time() - start_time > 0.25:
+                            time.sleep(0.15)
+                        else:
+                            time.sleep(0.1)
                         for k in KEY_LIST_MAIN:
                             release(k)
                         for k in KEY_LIST_SECOND:
                             release(k)
-                        time.sleep(0.02)
+                        time.sleep(0.025)
                         break
 
                     if get_mean:
