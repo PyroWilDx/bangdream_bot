@@ -1,6 +1,6 @@
 # Bang Dream - Bot
 This is a Python bot that can help you farm in the game "BanG Dream! Girls Band Party", it can play most of the easy and normal songs.
-I've made a video of the bot playing : https://youtu.be/rOcxnC_ip68
+I've made a video of the bot playing : https://youtu.be/N8OGuUVZr1Q
 
 ### REQUIREMENTS :
 1. Python 3.x (python libraries requirement : opencv-python; numpy; win32gui; keyboard; pyautogui)  
