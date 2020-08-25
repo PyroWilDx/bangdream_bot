@@ -1,6 +1,6 @@
 # Bang Dream - Bot
 This is a Python bot that can help you farm in the game "BanG Dream! Girls Band Party", it can play most of the easy and normal songs.
-I've made a video of the bot playing : https://youtu.be/N8OGuUVZr1Q
+I've made a video of the bot playing : [https://youtu.be/N8OGuUVZr1Q](https://youtu.be/N8OGuUVZr1Q)
 
 ### REQUIREMENTS :
 1. Python 3.x (python libraries requirement : [opencv-python](https://pypi.org/project/opencv-python/); [numpy](https://pypi.org/project/numpy/); [win32gui](https://pypi.org/project/win32gui/); [keyboard](https://pypi.org/project/keyboard/); [pyautogui](https://pypi.org/project/PyAutoGUI/))  
@@ -58,7 +58,7 @@ I've made a video of the bot playing : https://youtu.be/N8OGuUVZr1Q
 This is all for the game setup.
 
 #### Use the bot :
-1. Download the files in this repostery : [main.py](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/main.py); [setup.py](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/setup.py); [grabscreen.py](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/grabscreen.py); [confirm_button.png](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/confirm_button.png); [live_button.png](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/live_button.PNG); and put them all in the same folder. You can directly download all the files here : https://github.com/PyroWilDx/bangdream-bot/archive/master.zip (don't forget to extract the files)
+1. Download the files in this repostery : [main.py](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/main.py); [setup.py](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/setup.py); [grabscreen.py](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/grabscreen.py); [confirm_button.png](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/confirm_button.png); [live_button.png](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/live_button.PNG); and put them all in the same folder. You can directly download all the files here : [https://github.com/PyroWilDx/bangdream-bot/archive/master.zip](https://github.com/PyroWilDx/bangdream-bot/archive/master.zip) (don't forget to extract the files)
 
 2. Open Bang Dream on BlueStacks and go to the Home Screen of the game (where we see the characters talking)
 
