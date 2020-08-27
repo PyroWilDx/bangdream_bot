@@ -21,45 +21,7 @@ def song_choice():
 
     setup.bluestacks()
     home_to_game()
-
-
-def home_to_game():
-    while pyautogui.locateOnScreen("live_button.PNG", region=(825, 520, 905, 550), confidence=0.75) is None:
-        print("Can\'t find live button, please go to the home screen of the game (where we see the characters talking)")
-        time.sleep(1)
-    print("Don\'t move your mouse.")
-    time.sleep(1)
-    pyautogui.click(860, 500)  # live button
-    time.sleep(2)
-    pyautogui.click(535, 220)  # free live button
-    time.sleep(1)
-    pyautogui.click(470, 370)  # no recover button
-    while pyautogui.locateOnScreen("confirm_button.PNG", region=(680, 500, 800, 530), confidence=0.75) is None:
-        time.sleep(0.5)
-    time.sleep(1)
-
-    if song_choice_var == 2:
-        pyautogui.moveTo(250, 320)
-        pyautogui.dragTo(250, 240, duration=1)  # select next song
-    else:
-        time.sleep(1)
-        
-    pyautogui.click(730, 510)  # confirm button
-    time.sleep(1)
-    pyautogui.click(740, 510)  # start! button
-    time.sleep(1)
-    pyautogui.click(560, 410)  # ok button
-    time.sleep(0.1)
-    pyautogui.moveTo(470, 540)  # move to middle
-    time.sleep(5)
-    while cv2.countNonZero(cv2.cvtColor(grab_screen(region=(904, 64, 906, 66)), cv2.COLOR_RGB2GRAY)) == 0:
-        time.sleep(1)
-    time.sleep(2)
-    while cv2.countNonZero(cv2.cvtColor(grab_screen(region=(120, 465, 820, 500)), cv2.COLOR_RGB2GRAY)) == 0:
-        time.sleep(0.5)
-    time.sleep(1)
-    play()
-
+    
 
 def play():
     KEY_LIST_FLICK = ['r', 't', 'y']
@@ -176,6 +138,44 @@ def play():
         last_time = time.time()
 
 
+def home_to_game():
+    while pyautogui.locateOnScreen("live_button.PNG", region=(825, 520, 905, 550), confidence=0.75) is None:
+        print("Can\'t find live button, please go to the home screen of the game (where we see the characters talking)")
+        time.sleep(1)
+    print("Don\'t move your mouse.")
+    time.sleep(1)
+    pyautogui.click(860, 500)  # live button
+    time.sleep(2)
+    pyautogui.click(535, 220)  # free live button
+    time.sleep(1)
+    pyautogui.click(470, 370)  # no recover button
+    while pyautogui.locateOnScreen("confirm_button.PNG", region=(680, 500, 800, 530), confidence=0.75) is None:
+        time.sleep(0.5)
+    time.sleep(1)
+
+    if song_choice_var == 2:
+        pyautogui.moveTo(250, 320)
+        pyautogui.dragTo(250, 240, duration=1)  # select next song
+    else:
+        time.sleep(1)
+        
+    pyautogui.click(730, 510)  # confirm button
+    time.sleep(1)
+    pyautogui.click(740, 510)  # start! button
+    time.sleep(1)
+    pyautogui.click(560, 410)  # ok button
+    time.sleep(0.1)
+    pyautogui.moveTo(470, 540)  # move to middle
+    time.sleep(5)
+    while cv2.countNonZero(cv2.cvtColor(grab_screen(region=(904, 64, 906, 66)), cv2.COLOR_RGB2GRAY)) == 0:
+        time.sleep(1)
+    time.sleep(2)
+    while cv2.countNonZero(cv2.cvtColor(grab_screen(region=(120, 465, 820, 500)), cv2.COLOR_RGB2GRAY)) == 0:
+        time.sleep(0.5)
+    time.sleep(1)
+    play()
+
+
 def gameEnd_to_home():
     KEY_LIST = ['e', 'd', 'c']
     no_live_button = True
@@ -199,4 +199,4 @@ def gameEnd_to_home():
 
 if __name__ == '__main__':
     press_and_release('p', do_press=False, do_release=False)
-    song_choice()
+    play()
