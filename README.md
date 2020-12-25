@@ -65,8 +65,4 @@ This is all for the game setup.
 3. Make sure you can see BlueStacks on the foreground of your screen. Execute the [main.py](https://github.com/PyroWilDx/bangdream-bot/blob/master/bot/main.py) script on the cmd or with your IDE.  
 (If you're new to Python : you can run a python file by using the command ```py file_path\file.py``` in the cmd (ex : ```py C:\Users\USER_NAME\Downloads\bangdream-bot-master\bangdream-bot-master\bot\main.py```) 
 
-4. Now just follow the next little things the script asks you (*entering 1 or 2 ; setting up BlueStacks screen etc...*) and the bot will play itself !
-
-5. You can also modify the scripts if you can understand my shit spaghetti code to make the bot better xd.
-
-***Please tell me if you have any problem or suggestion (my disocrd is PyroWilDx#9745)***
+4. Now just follow the next little things the script asks you (*entering 1 or 2 ; setting up BlueStacks screen etc...*) and the bot should be play by itself !
