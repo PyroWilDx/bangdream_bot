@@ -5,8 +5,12 @@ import pyautogui
 import setup
 from grabscreen import grab_screen
 from keyboard import press_and_release, press, release
+from colorama import init, Fore
+
+init()
 
 song_choice_var = 2
+first_time = True
 
 
 def song_choice():
@@ -21,9 +25,11 @@ def song_choice():
 
     setup.bluestacks()
     home_to_game()
-    
+
 
 def play():
+    print("Game Start")
+
     KEY_LIST_FLICK = ['r', 't', 'y']
     KEY_LIST_MAIN = ['f', 'g', 'h']
     KEY_LIST_SECOND = ['v', 'b', 'n']
@@ -39,11 +45,19 @@ def play():
     FLICK_LOW_RANGE = np.array([143, 82, 255])  # 143, 82, 255
     FLICK_UP_RANGE = np.array([146, 90, 255])  # 146, 90, 255
 
-    FPS_list = []
-    last_time = time.time()
+    NOTE_POSITION_LIST = ["Left", "Middle", "Right"]
+
+    #FPS_list = []
+    #last_time = time.time()
+
+    for key in (KEY_LIST_MAIN + KEY_LIST_SECOND + KEY_LIST_FLICK):
+        time.sleep(0.01)
+        press_and_release(key)
+
+    print("PLAYING")
 
     while True:
-        screen_main = grab_screen(region=(120, 472, 820, 500))
+        screen_main = grab_screen(region=(120, 480, 820, 500))
         screen_main = cv2.cvtColor(screen_main, cv2.COLOR_BGR2HSV)
 
         screens_list = [screen_main[:, 0:270], screen_main[:, 320:380], screen_main[:, 430:700]]
@@ -61,14 +75,18 @@ def play():
             if all(value <= 2 for value in index_nonZero_list):
                 for i in index_nonZero_list:
                     press_and_release(KEY_LIST_MAIN[i])
-                time.sleep(0.04)
+                    print(Fore.LIGHTCYAN_EX + "NOTE - " + NOTE_POSITION_LIST[i])
+                time.sleep(0.035)
             elif all(value >= 9 for value in index_nonZero_list):
-                time.sleep(0.06)
+                time.sleep(0.045)
                 for i in index_nonZero_list:
                     press_and_release(KEY_LIST_FLICK[i - 9])
+                    print(Fore.LIGHTMAGENTA_EX + "FLICK")
+                time.sleep(0.035)
             else:
                 for k in KEY_LIST_MAIN:
                     press(k)
+                print(Fore.LIGHTGREEN_EX + "SLIDE" + Fore.WHITE + " / " + Fore.LIGHTYELLOW_EX + "SKILL")
 
                 get_mean = True
                 middle_slide = False
@@ -79,17 +97,18 @@ def play():
                     screen = grab_screen(region=(150, 380, 790, 400))
                     screen = cv2.cvtColor(screen, cv2.COLOR_BGR2HSV)
                     mask_slide_line = cv2.inRange(screen, SLIDE_LINE_LOW_RANGE, SLIDE_LINE_UP_RANGE)
+
                     slide_line_nonZero = cv2.findNonZero(mask_slide_line)
                     if slide_line_nonZero is None:
-                        if time.time() - start_time > 0.25:
+                        if time.time() - start_time > 0.275:
                             time.sleep(0.15)
                         else:
-                            time.sleep(0.1)
+                            time.sleep(0.05)
                         for k in KEY_LIST_MAIN:
                             release(k)
                         for k in KEY_LIST_SECOND:
                             release(k)
-                        time.sleep(0.025)
+                        #time.sleep(0.02)
                         break
 
                     if get_mean:
@@ -118,27 +137,59 @@ def play():
                         if cv2.findNonZero(mask_note) is not None or cv2.findNonZero(mask_skill) is not None:
                             for k in KEY_LIST_SECOND:
                                 press_and_release(k)
+                            print(Fore.LIGHTCYAN_EX + "NORMAL" + Fore.WHITE + " / " + Fore.LIGHTYELLOW_EX + "SKILL")
                         if cv2.findNonZero(mask_slide) is not None:
                             for k in KEY_LIST_SECOND:
                                 press(k)
                             two_slide = True
+                            print(Fore.LIGHTGREEN_EX + "SLIDE")
                         if cv2.findNonZero(mask_flick) is not None:
-                            time.sleep(0.04)
+                            time.sleep(0.0475)
                             for k in KEY_LIST_FLICK:
                                 press_and_release(k)
+                            print(Fore.LIGHTMAGENTA_EX + "FLICK")
+
+                    #show_screen(True) #show screen
 
         if cv2.countNonZero(cv2.cvtColor(screen_main, cv2.COLOR_RGB2GRAY)) == 0:
             gameEnd_to_home()
             break
 
-        FPS_list.append(round(1 / (time.time() - last_time)))
-        if len(FPS_list) == 250:
-            print("FPS = {}".format(sum(FPS_list) / len(FPS_list)))
-            FPS_list = []
-        last_time = time.time()
+        #show_screen(False) #show screen
+
+        #FPS_list.append(round(1 / (time.time() - last_time)))
+        #if len(FPS_list) == 250:
+        #    print("FPS = {}".format(sum(FPS_list) / len(FPS_list)))
+        #    FPS_list = []
+        #last_time = time.time()
+
+
+def show_screen(showLine):
+    NOTE_LOW_RANGE = np.array([169, 74, 255])
+    NOTE_UP_RANGE = np.array([169, 74, 255])
+    SKILL_LOW_RANGE = np.array([91, 128, 255])
+    SKILL_UP_RANGE = np.array([91, 128, 255])
+    SLIDE_LOW_RANGE = np.array([44, 102, 255])
+    SLIDE_UP_RANGE = np.array([44, 102, 255])
+    SLIDE_LINE_LOW_RANGE = np.array([0, 250, 55])
+    SLIDE_LINE_UP_RANGE = np.array([255, 255, 255])
+    FLICK_LOW_RANGE = np.array([143, 82, 255])
+    FLICK_UP_RANGE = np.array([146, 90, 255])
+
+    screen_show = grab_screen(region=(120, 250, 820, 500))
+    screen_show = cv2.cvtColor(screen_show, cv2.COLOR_BGR2HSV)
+
+    if not showLine:
+        screen_show = cv2.inRange(screen_show, NOTE_LOW_RANGE, NOTE_UP_RANGE) + cv2.inRange(screen_show, SKILL_LOW_RANGE, SKILL_UP_RANGE) + cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + cv2.inRange(screen_show, FLICK_LOW_RANGE, FLICK_UP_RANGE)
+    else:
+        screen_show = cv2.inRange(screen_show, NOTE_LOW_RANGE, NOTE_UP_RANGE) + cv2.inRange(screen_show, SKILL_LOW_RANGE, SKILL_UP_RANGE) + cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + cv2.inRange(screen_show, FLICK_LOW_RANGE, FLICK_UP_RANGE) + cv2.inRange(screen_show, SLIDE_LINE_LOW_RANGE, SLIDE_LINE_UP_RANGE)
+
+    cv2.imshow("BOT GLOBAL GAME VIEW", np.array(screen_show))
+    cv2.waitKey(1)
 
 
 def home_to_game():
+    global first_time
     while pyautogui.locateOnScreen("live_button.PNG", region=(825, 520, 905, 550), confidence=0.75) is None:
         print("Can\'t find live button, please go to the home screen of the game (where we see the characters talking)")
         time.sleep(1)
@@ -154,11 +205,17 @@ def home_to_game():
     time.sleep(1)
 
     if song_choice_var == 2:
-        pyautogui.moveTo(250, 320)
-        pyautogui.dragTo(250, 240, duration=1)  # select next song
+        if not first_time:
+            print("Choosing the next song")
+            pyautogui.moveTo(250, 320)
+            pyautogui.dragTo(250, 240, duration=1)  # select next song
+        else:
+            first_time = False
+            time.sleep(1)
     else:
         time.sleep(1)
-        
+        print("Choosing the same song")
+
     pyautogui.click(730, 510)  # confirm button
     time.sleep(1)
     pyautogui.click(740, 510)  # start! button
@@ -177,6 +234,7 @@ def home_to_game():
 
 
 def gameEnd_to_home():
+    print(Fore.WHITE + "Game End")
     KEY_LIST = ['e', 'd', 'c']
     no_live_button = True
     while no_live_button:
@@ -199,4 +257,4 @@ def gameEnd_to_home():
 
 if __name__ == '__main__':
     press_and_release('p', do_press=False, do_release=False)
-    play()
+    song_choice()
