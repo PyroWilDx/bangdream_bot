@@ -1,5 +1,6 @@
 import win32gui
 import time
+import win32com.client
 
 
 def bluestacks():
@@ -25,6 +26,8 @@ def bluestacks():
         time.sleep(1)
 
     window = win32gui.FindWindowEx(None, None, None, win2find)
+    shell = win32com.client.Dispatch("WScript.Shell")
+    shell.SendKeys('%')
     win32gui.SetForegroundWindow(window)
     print("BlueStacks window has been set up, DON\'T move or resize it.")
 
