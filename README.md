@@ -3,7 +3,7 @@ This is a Python bot that can help you farm in the game "BanG Dream! Girls Band 
 I've made a video of the bot playing : [https://youtu.be/CxnZQtHn5q0](https://youtu.be/CxnZQtHn5q0)
 
 ### REQUIREMENTS :
-1. Python 3.x (python libraries requirement : [opencv-python](https://pypi.org/project/opencv-python/); [numpy](https://pypi.org/project/numpy/); [pywin32](https://pypi.org/project/pywin32/); [keyboard](https://pypi.org/project/keyboard/); [pyautogui](https://pypi.org/project/PyAutoGUI/))  
+1. Python 3.4+ (python libraries requirement : [opencv-python](https://pypi.org/project/opencv-python/); [numpy](https://pypi.org/project/numpy/); [pywin32](https://pypi.org/project/pywin32/); [keyboard](https://pypi.org/project/keyboard/); [pyautogui](https://pypi.org/project/PyAutoGUI/))  
 (If you're new to Python : see how to install it on [this video](https://www.youtube.com/watch?v=bnhQBUEpWlg). After the installation, download the libraries with the command ```pip install library_name``` in the cmd (ex : ```pip install opencv-python```))
 
 2. BlueStacks (other emulators won't work)
@@ -16,8 +16,8 @@ I've made a video of the bot playing : [https://youtu.be/CxnZQtHn5q0](https://yo
 
 2. Change your game settings to those ones :
    - **Live Settings :**
-     - _Note Speed : Depends on your computer (I think it should be between 1.0 and 7.0, try it yourself after finishing the setup and see which speed works the best. I personally use the bot with 3.0 note speed)_
-     - _Note Size : 150%_
+     - _Note Speed : Depends on your computer (I think it should be between 1.0 and 7.0, try it yourself after finishing the setup and see which speed works the best. I personally use the bot with 4.0 note speed)_
+     - _Note Size : 160%_
      - _Song Adjustement : As you want_
      - _Long Note Transparency : 100%_
      - _Dual Tap Line : OFF_
