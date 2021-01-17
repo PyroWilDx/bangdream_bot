@@ -10,17 +10,31 @@ from colorama import init, Fore
 init()
 
 song_choice_var = 2
+song_try_counter = 0
+is_playing_easy = True
 first_time = True
+how_much_try = 5
 
 
-def song_choice():
+def ask_options():
     global song_choice_var
+    global is_playing_easy
+    global how_much_try
 
     try:
-        song_choice_var = int(input(
-            "Enter 1 to always play the same song OR enter 2 to play the next song each time : "))
+        print("Enter 1 to always play the same song")
+        print("Enter 2 to play the next song each time")
+        print("Enter 3 to try to full-combo every song :\n  -If the bot doesn't get a full-combo then it plays the song again\n    -If it doesn't full-combo after X times then it goes to the next song\n  -If it gets the full combo then it plays the next song that isn't already full-comboed")
+        print("Enter 4 to try to full-perfect every song (Same as full-combo but with for full-perfects)")
+        song_choice_var = int(input())
+        if song_choice_var == 3 or song_choice_var == 4:
+            print("Enter 0 if you are playing normal level songs")
+            print("Enter 1 if you are playing easy level songs")
+            is_playing_easy = bool(int(input()))
+            print("How much time do you want the bot to try again if it fails to full-combo/perfect the song ?")
+            how_much_try = int(input())
     except ValueError:
-        print("You didn't enter 1 or 2 so the bot will play the next song each time.")
+        print("You didn't enter 1, 2, 3 or 4 so the bot will play the next song each time (2).")
         song_choice_var = 2
 
     setup.bluestacks()
@@ -51,13 +65,15 @@ def play():
     #last_time = time.time()
 
     for key in (KEY_LIST_MAIN + KEY_LIST_SECOND + KEY_LIST_FLICK):
-        time.sleep(0.01)
+        time.sleep(0.05)
         press_and_release(key)
-
     print("PLAYING")
 
+    last_note_pressed_time = time.time()
+    note_counter = 0
+
     while True:
-        screen_main = grab_screen(region=(120, 480, 820, 500))
+        screen_main = grab_screen(region=(120, 480, 820, 490))
         screen_main = cv2.cvtColor(screen_main, cv2.COLOR_BGR2HSV)
 
         screens_list = [screen_main[:, 0:270], screen_main[:, 320:380], screen_main[:, 430:700]]
@@ -75,14 +91,17 @@ def play():
             if all(value <= 2 for value in index_nonZero_list):
                 for i in index_nonZero_list:
                     press_and_release(KEY_LIST_MAIN[i])
-                    print(Fore.LIGHTCYAN_EX + "NOTE - " + NOTE_POSITION_LIST[i])
-                time.sleep(0.035)
+                    if (time.time() - last_note_pressed_time) > 0.125:
+                        note_counter += 1
+                        print(Fore.LIGHTCYAN_EX + "NOTE - " + NOTE_POSITION_LIST[i] + " " + str(note_counter))
+                        last_note_pressed_time = time.time()
+
             elif all(value >= 9 for value in index_nonZero_list):
                 time.sleep(0.045)
                 for i in index_nonZero_list:
                     press_and_release(KEY_LIST_FLICK[i - 9])
                     print(Fore.LIGHTMAGENTA_EX + "FLICK")
-                time.sleep(0.035)
+
             else:
                 for k in KEY_LIST_MAIN:
                     press(k)
@@ -103,10 +122,8 @@ def play():
                         if time.time() - start_time > 0.275:
                             time.sleep(0.15)
                         else:
-                            time.sleep(0.05)
-                        for k in KEY_LIST_MAIN:
-                            release(k)
-                        for k in KEY_LIST_SECOND:
+                            time.sleep(0.09)
+                        for k in (KEY_LIST_MAIN + KEY_LIST_SECOND):
                             release(k)
                         #time.sleep(0.02)
                         break
@@ -124,10 +141,10 @@ def play():
 
                     if not two_slide:
                         if not middle_slide:
-                            screen = grab_screen(region=(x[0], 468, x[1], 500))
+                            screen = grab_screen(region=(x[0], 475, x[1], 490)) #468 500
                         else:
-                            img1 = grab_screen(region=(120, 468, 400, 500))
-                            img2 = grab_screen(region=(540, 468, 820, 500))
+                            img1 = grab_screen(region=(120, 475, 400, 490))
+                            img2 = grab_screen(region=(540, 475, 820, 490))
                             screen = np.concatenate((img1, img2), axis=1)
                         screen = cv2.cvtColor(screen, cv2.COLOR_BGR2HSV)
                         mask_note = cv2.inRange(screen, NOTE_LOW_RANGE, NOTE_UP_RANGE)
@@ -144,7 +161,7 @@ def play():
                             two_slide = True
                             print(Fore.LIGHTGREEN_EX + "SLIDE")
                         if cv2.findNonZero(mask_flick) is not None:
-                            time.sleep(0.0475)
+                            time.sleep(0.045)
                             for k in KEY_LIST_FLICK:
                                 press_and_release(k)
                             print(Fore.LIGHTMAGENTA_EX + "FLICK")
@@ -162,6 +179,10 @@ def play():
         #    print("FPS = {}".format(sum(FPS_list) / len(FPS_list)))
         #    FPS_list = []
         #last_time = time.time()
+
+
+def is_dead():
+    pass
 
 
 def show_screen(showLine):
@@ -190,6 +211,8 @@ def show_screen(showLine):
 
 def home_to_game():
     global first_time
+    global song_try_counter
+
     while pyautogui.locateOnScreen("live_button.PNG", region=(825, 520, 905, 550), confidence=0.75) is None:
         print("Can\'t find live button, please go to the home screen of the game (where we see the characters talking)")
         time.sleep(1)
@@ -204,17 +227,76 @@ def home_to_game():
         time.sleep(0.5)
     time.sleep(1)
 
-    if song_choice_var == 2:
+    if song_choice_var == 1:
+        time.sleep(1)
+        print("Choosing the same song")
+
+    elif song_choice_var == 2:
         if not first_time:
             print("Choosing the next song")
             pyautogui.moveTo(250, 320)
             pyautogui.dragTo(250, 240, duration=1)  # select next song
         else:
+            print("Selecting song")
             first_time = False
             time.sleep(1)
-    else:
+
+    elif song_choice_var == 3:
         time.sleep(1)
-        print("Choosing the same song")
+
+        if is_playing_easy:
+            x1 = 327
+            width = 0
+        else:
+            x1 = 351
+            width = 1
+
+        while pyautogui.locateOnScreen("fullcombostar.png", region=(x1, 267, 27+width, 28), confidence=0.75) is not None \
+                or pyautogui.locateOnScreen("fullperfectstar.png", region=(x1, 267, 27+width, 28), confidence=0.75) is not None:
+            print("This song is already full-comboed, selecting next song...")
+            pyautogui.moveTo(250, 320)
+            pyautogui.dragTo(250, 240, duration=1)  # select next song
+            song_try_counter = 0
+            time.sleep(1)
+
+        if song_try_counter == how_much_try:
+            print("The bot did not succeed to full-combo this song after 5 times, selecting next song...")
+            pyautogui.moveTo(250, 320)
+            pyautogui.dragTo(250, 240, duration=1)  # select next song
+            song_try_counter = 0
+
+        song_try_counter += 1
+
+        if song_try_counter > 1:
+            print("Replaying the same song")
+
+    elif song_choice_var == 4:
+        time.sleep(1)
+
+        if is_playing_easy:
+            x1 = 327
+            width = 0
+        else:
+            x1 = 351
+            width = 1
+
+        while pyautogui.locateOnScreen("fullperfectstar.png", region=(x1, 267, 27+width, 28), confidence=0.75) is not None:
+            print("This song is already full-perfected, selecting next song...")
+            pyautogui.moveTo(250, 320)
+            pyautogui.dragTo(250, 240, duration=1)  # select next song
+            song_try_counter = 0
+            time.sleep(1)
+
+        if song_try_counter == how_much_try:
+            print("The bot did not succeed to full-perfect this song after 5 times, selecting next song...")
+            pyautogui.moveTo(250, 320)
+            pyautogui.dragTo(250, 240, duration=1)  # select next song
+            song_try_counter = 0
+
+        song_try_counter += 1
+
+        if song_try_counter > 1:
+            print("Replaying the same song")
 
     pyautogui.click(730, 510)  # confirm button
     time.sleep(1)
@@ -257,4 +339,4 @@ def gameEnd_to_home():
 
 if __name__ == '__main__':
     press_and_release('p', do_press=False, do_release=False)
-    song_choice()
+    ask_options()
