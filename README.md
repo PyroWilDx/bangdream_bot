@@ -8,7 +8,7 @@ I've made a video of the bot playing : [https://youtu.be/CxnZQtHn5q0](https://yo
 
 2. BlueStacks (other emulators won't work)
 
-3. a Windows computer that can run the game with at least 40 FPS on BlueStacks (the dimensions of your screen must be greater than 1000x570 pixels) with a decent internet connection.
+3. a Windows computer that can run the game with at least 50 FPS on BlueStacks (the dimensions of your screen must be greater than 1000x570 pixels) with a decent internet connection.
 
 ### HOW TO USE : 
 #### Setup the game :
