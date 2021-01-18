@@ -24,7 +24,11 @@ def ask_options():
     try:
         print("Enter 1 to always play the same song")
         print("Enter 2 to play the next song each time")
-        print("Enter 3 to try to full-combo every song :\n  -If the bot doesn't get a full-combo then it plays the song again\n    -If it doesn't full-combo after X times then it goes to the next song\n  -If it gets the full combo then it plays the next song that isn't already full-comboed")
+        print(
+            "Enter 3 to try to full-combo every song :\n"
+                "   -If the bot doesn't get a full-combo then it plays the song again\n"
+                "      -If it doesn't full-combo after X times then it goes to the next song\n"
+                "   -If it gets the full combo then it plays the next song that isn't already full-comboed")
         print("Enter 4 to try to full-perfect every song (Same as full-combo but with for full-perfects)")
         song_choice_var = int(input())
         if song_choice_var == 3 or song_choice_var == 4:
@@ -90,10 +94,11 @@ def play():
             if all(value <= 2 for value in index_nonZero_list):
                 for i in index_nonZero_list:
                     press_and_release(KEY_LIST_MAIN[i])
-                    if (time.time() - last_note_pressed_time) > 0.125:
-                        print(Fore.LIGHTCYAN_EX + "NOTE - " + NOTE_POSITION_LIST[i])
+                    if time.time() - last_note_pressed_time > 0.125:
+                        for j in index_nonZero_list:
+                            print(Fore.LIGHTCYAN_EX + "NOTE - " + NOTE_POSITION_LIST[j])
                         last_note_pressed_time = time.time()
-                #time.sleep(0.025)
+                # time.sleep(0.025)
 
             elif all(value >= 9 for value in index_nonZero_list):
                 time.sleep(0.045)
@@ -124,7 +129,7 @@ def play():
                             time.sleep(0.05)
                         for k in (KEY_LIST_MAIN + KEY_LIST_SECOND):
                             release(k)
-                        #time.sleep(0.02)
+                        # time.sleep(0.02)
                         break
 
                     if get_mean:
@@ -140,7 +145,7 @@ def play():
 
                     if not two_slide:
                         if not middle_slide:
-                            screen = grab_screen(region=(x[0], 475, x[1], 490)) #468 500
+                            screen = grab_screen(region=(x[0], 475, x[1], 490))  # 468 500
                         else:
                             img1 = grab_screen(region=(120, 475, 400, 490))
                             img2 = grab_screen(region=(540, 475, 820, 490))
@@ -165,13 +170,13 @@ def play():
                                 press_and_release(k)
                             print(Fore.LIGHTMAGENTA_EX + "FLICK")
 
-                    #show_screen(True) #show screen
+                    # show_screen(True) #show screen
 
         if cv2.countNonZero(cv2.cvtColor(screen_main, cv2.COLOR_RGB2GRAY)) == 0:
             gameEnd_to_home()
             break
 
-        #show_screen(False) #show screen
+        # show_screen(False) #show screen
 
         FPS_list.append(round(1 / (time.time() - last_time)))
         if len(FPS_list) == 250:
@@ -200,9 +205,18 @@ def show_screen(showLine):
     screen_show = cv2.cvtColor(screen_show, cv2.COLOR_BGR2HSV)
 
     if not showLine:
-        screen_show = cv2.inRange(screen_show, NOTE_LOW_RANGE, NOTE_UP_RANGE) + cv2.inRange(screen_show, SKILL_LOW_RANGE, SKILL_UP_RANGE) + cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + cv2.inRange(screen_show, FLICK_LOW_RANGE, FLICK_UP_RANGE)
+        screen_show = cv2.inRange(screen_show, NOTE_LOW_RANGE, NOTE_UP_RANGE) + \
+                      cv2.inRange(screen_show, SKILL_LOW_RANGE, SKILL_UP_RANGE) + \
+                      cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + \
+                      cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + \
+                      cv2.inRange(screen_show, FLICK_LOW_RANGE, FLICK_UP_RANGE)
     else:
-        screen_show = cv2.inRange(screen_show, NOTE_LOW_RANGE, NOTE_UP_RANGE) + cv2.inRange(screen_show, SKILL_LOW_RANGE, SKILL_UP_RANGE) + cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + cv2.inRange(screen_show, FLICK_LOW_RANGE, FLICK_UP_RANGE) + cv2.inRange(screen_show, SLIDE_LINE_LOW_RANGE, SLIDE_LINE_UP_RANGE)
+        screen_show = cv2.inRange(screen_show, NOTE_LOW_RANGE, NOTE_UP_RANGE) + \
+                      cv2.inRange(screen_show, SKILL_LOW_RANGE, SKILL_UP_RANGE) + \
+                      cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + \
+                      cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + \
+                      cv2.inRange(screen_show, FLICK_LOW_RANGE, FLICK_UP_RANGE) + \
+                      cv2.inRange(screen_show, SLIDE_LINE_LOW_RANGE, SLIDE_LINE_UP_RANGE)
 
     cv2.imshow("BOT GLOBAL GAME VIEW", np.array(screen_show))
     cv2.waitKey(1)
@@ -213,7 +227,8 @@ def home_to_game():
     global song_try_counter
 
     while pyautogui.locateOnScreen("live_button.PNG", region=(825, 520, 905, 550), confidence=0.75) is None:
-        print("Can\'t find live button, please go to the home screen of the game (where we see the characters talking)")
+        print("Can\'t find live button, please go to the "
+              "home screen of the game (where we see the characters talking)")
         time.sleep(1)
     print("Don\'t move your mouse.")
     time.sleep(1)
@@ -250,8 +265,10 @@ def home_to_game():
             x1 = 351
             width = 1
 
-        while pyautogui.locateOnScreen("fullcombostar.png", region=(x1, 267, 27+width, 28), confidence=0.75) is not None \
-                or pyautogui.locateOnScreen("fullperfectstar.png", region=(x1, 267, 27+width, 28), confidence=0.75) is not None:
+        while pyautogui.locateOnScreen("fullcombostar.png", region=(x1, 267, 27 + width, 28),
+                                       confidence=0.75) is not None \
+                or pyautogui.locateOnScreen("fullperfectstar.png", region=(x1, 267, 27 + width, 28),
+                                            confidence=0.75) is not None:
             print("This song is already full-comboed, selecting next song...")
             pyautogui.moveTo(250, 320)
             pyautogui.dragTo(250, 240, duration=1)  # select next song
@@ -279,7 +296,8 @@ def home_to_game():
             x1 = 351
             width = 1
 
-        while pyautogui.locateOnScreen("fullperfectstar.png", region=(x1, 267, 27+width, 28), confidence=0.75) is not None:
+        while pyautogui.locateOnScreen("fullperfectstar.png", region=(x1, 267, 27 + width, 28),
+                                       confidence=0.75) is not None:
             print("This song is already full-perfected, selecting next song...")
             pyautogui.moveTo(250, 320)
             pyautogui.dragTo(250, 240, duration=1)  # select next song
