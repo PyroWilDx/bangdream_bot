@@ -30,15 +30,33 @@ def ask_options():
                 "      -If it doesn't full-combo after X times then it goes to the next song\n"
                 "   -If it gets the full combo then it plays the next song that isn't already full-comboed")
         print("Enter 4 to try to full-perfect every song (Same as full-combo but with for full-perfects)")
-        song_choice_var = int(input())
+        song_choice_var = input()
+        #song_choice_var = int(song_choice_var)
+        if not (song_choice_var == 1 or song_choice_var == 2 or song_choice_var == 3 or song_choice_var == 4 or song_choice_var == "video"):
+            raise ValueError
         if song_choice_var == 3 or song_choice_var == 4:
             print("Enter 0 if you are playing normal level songs")
             print("Enter 1 if you are playing easy level songs")
-            is_playing_easy = bool(int(input()))
-            print("How much time do you want the bot to try again if it fails to full-combo/perfect the song ?")
-            how_much_try = int(input())
+            try:
+                is_playing_easy = int(input())
+                if is_playing_easy != 0 and is_playing_easy != 1:
+                    raise ValueError
+                else:
+                    is_playing_easy = bool(is_playing_easy)
+                print("How much time do you want the bot to try again if it fails to full-combo/perfect the song ?")
+                how_much_try = int(input())
+                if how_much_try < 1:
+                    print("This value is not valid, it will be set to the default value (3)\n")
+                    how_much_try = 3
+                elif how_much_try > 20:
+                    print("I think this is a bit too much, the value will be set to (20)\n")
+                    how_much_try = 20
+            except ValueError:
+                print("This value is not valid, please retry..\n")
+                time.sleep(0.5)
+                ask_options()
     except ValueError:
-        print("You didn't enter 1, 2, 3 or 4 so the bot will play the next song each time (2).")
+        print("This value is not valid, the bot will play the next song each time (2)\n")
         song_choice_var = 2
 
     setup.bluestacks()
@@ -46,6 +64,7 @@ def ask_options():
 
 
 def play():
+    global played
     print("Game Start")
 
     KEY_LIST_FLICK = ['r', 't', 'y']
@@ -65,8 +84,8 @@ def play():
 
     NOTE_POSITION_LIST = ["Left", "Middle", "Right"]
 
-    FPS_list = []
-    last_time = time.time()
+    #FPS_list = []
+    #last_time = time.time()
 
     for key in (KEY_LIST_MAIN + KEY_LIST_SECOND + KEY_LIST_FLICK):
         time.sleep(0.1)
@@ -114,6 +133,7 @@ def play():
                 get_mean = True
                 middle_slide = False
                 two_slide = False
+
                 x = (120, 820)
                 start_time = time.time()
                 while True:
@@ -123,10 +143,13 @@ def play():
 
                     slide_line_nonZero = cv2.findNonZero(mask_slide_line)
                     if slide_line_nonZero is None:
-                        if time.time() - start_time > 0.275:
+                        if time.time() - start_time > 0.26:
                             time.sleep(0.15)
+                        #elif time.time() - start_time < 0.125:
+                        #    print("SHORT")
+                        #    time.sleep(0.125) #0.1
                         else:
-                            time.sleep(0.05)
+                            time.sleep(0.12) #0.075
                         for k in (KEY_LIST_MAIN + KEY_LIST_SECOND):
                             release(k)
                         # time.sleep(0.02)
@@ -173,16 +196,17 @@ def play():
                     # show_screen(True) #show screen
 
         if cv2.countNonZero(cv2.cvtColor(screen_main, cv2.COLOR_RGB2GRAY)) == 0:
+            played += 1
             gameEnd_to_home()
             break
 
         # show_screen(False) #show screen
 
-        FPS_list.append(round(1 / (time.time() - last_time)))
-        if len(FPS_list) == 250:
-            print("FPS = {}".format(sum(FPS_list) / len(FPS_list)))
-            FPS_list = []
-        last_time = time.time()
+        #FPS_list.append(round(1 / (time.time() - last_time)))
+        #if len(FPS_list) == 250:
+        #    print("FPS = {}".format(sum(FPS_list) / len(FPS_list)))
+        #    FPS_list = []
+        #last_time = time.time()
 
 
 def is_dead():
@@ -221,8 +245,10 @@ def show_screen(showLine):
     cv2.imshow("BOT GLOBAL GAME VIEW", np.array(screen_show))
     cv2.waitKey(1)
 
+played = 0
 
 def home_to_game():
+    global played
     global first_time
     global song_try_counter
 
@@ -276,7 +302,7 @@ def home_to_game():
             time.sleep(1)
 
         if song_try_counter == how_much_try:
-            print("The bot did not succeed to full-combo this song after 5 times, selecting next song...")
+            print("The bot did not succeed to full-combo this song after", how_much_try, "times, selecting next song...")
             pyautogui.moveTo(250, 320)
             pyautogui.dragTo(250, 240, duration=1)  # select next song
             song_try_counter = 0
@@ -285,6 +311,7 @@ def home_to_game():
 
         if song_try_counter > 1:
             print("Replaying the same song")
+
 
     elif song_choice_var == 4:
         time.sleep(1)
@@ -305,7 +332,7 @@ def home_to_game():
             time.sleep(1)
 
         if song_try_counter == how_much_try:
-            print("The bot did not succeed to full-perfect this song after 5 times, selecting next song...")
+            print("The bot did not succeed to full-perfect this song after", how_much_try, "times, selecting next song...")
             pyautogui.moveTo(250, 320)
             pyautogui.dragTo(250, 240, duration=1)  # select next song
             song_try_counter = 0
@@ -314,6 +341,23 @@ def home_to_game():
 
         if song_try_counter > 1:
             print("Replaying the same song")
+
+
+    elif song_choice_var == "video":
+        if played != 0:
+            if pyautogui.locateOnScreen("fullcombostar.png", region=(351, 267, 28, 28),confidence=0.75) is not None \
+                or pyautogui.locateOnScreen("fullperfectstar.png", region=(351, 267, 28, 28), confidence=0.75) is not None:
+                print("This song is already full-comboed, selecting next song...")
+                pyautogui.moveTo(250, 320)
+                pyautogui.dragTo(250, 240, duration=1)  # select next song
+                played = 0
+                time.sleep(1)
+            elif played > 1:
+                print("Couldn't full-combo this song within 2 tries selecting next one.")
+                pyautogui.moveTo(250, 320)
+                pyautogui.dragTo(250, 240, duration=1)  # select next song
+                played = 0
+                time.sleep(1)
 
     pyautogui.click(730, 510)  # confirm button
     time.sleep(1)
@@ -338,7 +382,7 @@ def gameEnd_to_home():
     no_live_button = True
     while no_live_button:
         for k in KEY_LIST:
-            time.sleep(0.25)
+            time.sleep(0.5)
             press_and_release(k)
             screen = grab_screen(region=(820, 70, 850, 95))
             screen = cv2.cvtColor(screen, cv2.COLOR_BGR2HSV)
