@@ -61,16 +61,15 @@ def play():
 
     NOTE_POSITION_LIST = ["Left", "Middle", "Right"]
 
-    #FPS_list = []
-    #last_time = time.time()
+    FPS_list = []
+    last_time = time.time()
 
     for key in (KEY_LIST_MAIN + KEY_LIST_SECOND + KEY_LIST_FLICK):
-        time.sleep(0.05)
+        time.sleep(0.1)
         press_and_release(key)
     print("PLAYING")
 
     last_note_pressed_time = time.time()
-    note_counter = 0
 
     while True:
         screen_main = grab_screen(region=(120, 480, 820, 490))
@@ -92,9 +91,9 @@ def play():
                 for i in index_nonZero_list:
                     press_and_release(KEY_LIST_MAIN[i])
                     if (time.time() - last_note_pressed_time) > 0.125:
-                        note_counter += 1
-                        print(Fore.LIGHTCYAN_EX + "NOTE - " + NOTE_POSITION_LIST[i] + " " + str(note_counter))
+                        print(Fore.LIGHTCYAN_EX + "NOTE - " + NOTE_POSITION_LIST[i])
                         last_note_pressed_time = time.time()
+                #time.sleep(0.025)
 
             elif all(value >= 9 for value in index_nonZero_list):
                 time.sleep(0.045)
@@ -122,7 +121,7 @@ def play():
                         if time.time() - start_time > 0.275:
                             time.sleep(0.15)
                         else:
-                            time.sleep(0.09)
+                            time.sleep(0.05)
                         for k in (KEY_LIST_MAIN + KEY_LIST_SECOND):
                             release(k)
                         #time.sleep(0.02)
@@ -174,11 +173,11 @@ def play():
 
         #show_screen(False) #show screen
 
-        #FPS_list.append(round(1 / (time.time() - last_time)))
-        #if len(FPS_list) == 250:
-        #    print("FPS = {}".format(sum(FPS_list) / len(FPS_list)))
-        #    FPS_list = []
-        #last_time = time.time()
+        FPS_list.append(round(1 / (time.time() - last_time)))
+        if len(FPS_list) == 250:
+            print("FPS = {}".format(sum(FPS_list) / len(FPS_list)))
+            FPS_list = []
+        last_time = time.time()
 
 
 def is_dead():
