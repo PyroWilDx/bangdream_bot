@@ -26,12 +26,13 @@ def ask_options():
         print("Enter 2 to play the next song each time")
         print(
             "Enter 3 to try to full-combo every song :\n"
-                "   -If the bot doesn't get a full-combo then it plays the song again\n"
-                "      -If it doesn't full-combo after X times then it goes to the next song\n"
-                "   -If it gets the full combo then it plays the next song that isn't already full-comboed")
+            "   -If the bot doesn't get a full-combo then it plays the song again\n"
+            "      -If it doesn't full-combo after X times then it goes to the next song\n"
+            "   -If it gets the full combo then it plays the next song that isn't already full-comboed")
         print("Enter 4 to try to full-perfect every song (Same as full-combo but with for full-perfects)")
         song_choice_var = input()
-        #song_choice_var = int(song_choice_var)
+        if song_choice_var != "video":
+            song_choice_var = int(song_choice_var)
         if not (song_choice_var == 1 or song_choice_var == 2 or song_choice_var == 3 or song_choice_var == 4 or song_choice_var == "video"):
             raise ValueError
         if song_choice_var == 3 or song_choice_var == 4:
@@ -43,13 +44,16 @@ def ask_options():
                     raise ValueError
                 else:
                     is_playing_easy = bool(is_playing_easy)
-                print("How much time do you want the bot to try again if it fails to full-combo/perfect the song ?")
+                print(
+                    "How much time do you want the bot to try again if it fails to full-combo/perfect the song ?")
                 how_much_try = int(input())
                 if how_much_try < 1:
-                    print("This value is not valid, it will be set to the default value (3)\n")
+                    print(
+                        "This value is not valid, it will be set to the default value (3)\n")
                     how_much_try = 3
                 elif how_much_try > 20:
-                    print("I think this is a bit too much, the value will be set to (20)\n")
+                    print(
+                        "I think this is a bit too much, the value will be set to (20)\n")
                     how_much_try = 20
             except ValueError:
                 print("This value is not valid, please retry..\n")
@@ -84,8 +88,8 @@ def play():
 
     NOTE_POSITION_LIST = ["Left", "Middle", "Right"]
 
-    #FPS_list = []
-    #last_time = time.time()
+    # FPS_list = []
+    # last_time = time.time()
 
     for key in (KEY_LIST_MAIN + KEY_LIST_SECOND + KEY_LIST_FLICK):
         time.sleep(0.1)
@@ -98,16 +102,20 @@ def play():
         screen_main = grab_screen(region=(120, 480, 820, 490))
         screen_main = cv2.cvtColor(screen_main, cv2.COLOR_BGR2HSV)
 
-        screens_list = [screen_main[:, 0:270], screen_main[:, 320:380], screen_main[:, 430:700]]
+        screens_list = [screen_main[:, 0:270],
+                        screen_main[:, 320:380], screen_main[:, 430:700]]
 
         masks_list = [cv2.inRange(screens_list[i], NOTE_LOW_RANGE, NOTE_UP_RANGE) for i in range(0, 3)] + \
                      [cv2.inRange(screens_list[i], SKILL_LOW_RANGE, SKILL_UP_RANGE) for i in range(0, 3)] + \
                      [cv2.inRange(screens_list[i], SLIDE_LOW_RANGE, SLIDE_UP_RANGE) for i in range(0, 3)] + \
-                     [cv2.inRange(screens_list[i], FLICK_LOW_RANGE, FLICK_UP_RANGE) for i in range(0, 3)]
+                     [cv2.inRange(screens_list[i], FLICK_LOW_RANGE,
+                                  FLICK_UP_RANGE) for i in range(0, 3)]
 
-        findNonZero_list = [cv2.findNonZero(masks_list[i]) for i in range(0, 12)]
+        findNonZero_list = [cv2.findNonZero(
+            masks_list[i]) for i in range(0, 12)]
 
-        index_nonZero_list = [index for index, value in enumerate(findNonZero_list) if value is not None]
+        index_nonZero_list = [index for index, value in enumerate(
+            findNonZero_list) if value is not None]
 
         if len(index_nonZero_list) > 0:
             if all(value <= 2 for value in index_nonZero_list):
@@ -115,7 +123,8 @@ def play():
                     press_and_release(KEY_LIST_MAIN[i])
                     if time.time() - last_note_pressed_time > 0.125:
                         for j in index_nonZero_list:
-                            print(Fore.LIGHTCYAN_EX + "NOTE - " + NOTE_POSITION_LIST[j])
+                            print(Fore.LIGHTCYAN_EX + "NOTE - " +
+                                  NOTE_POSITION_LIST[j])
                         last_note_pressed_time = time.time()
                 # time.sleep(0.025)
 
@@ -128,7 +137,8 @@ def play():
             else:
                 for k in KEY_LIST_MAIN:
                     press(k)
-                print(Fore.LIGHTGREEN_EX + "SLIDE" + Fore.WHITE + " / " + Fore.LIGHTYELLOW_EX + "SKILL")
+                print(Fore.LIGHTGREEN_EX + "SLIDE" + Fore.WHITE +
+                      " / " + Fore.LIGHTYELLOW_EX + "SKILL")
 
                 get_mean = True
                 middle_slide = False
@@ -139,17 +149,18 @@ def play():
                 while True:
                     screen = grab_screen(region=(150, 380, 790, 400))
                     screen = cv2.cvtColor(screen, cv2.COLOR_BGR2HSV)
-                    mask_slide_line = cv2.inRange(screen, SLIDE_LINE_LOW_RANGE, SLIDE_LINE_UP_RANGE)
+                    mask_slide_line = cv2.inRange(
+                        screen, SLIDE_LINE_LOW_RANGE, SLIDE_LINE_UP_RANGE)
 
                     slide_line_nonZero = cv2.findNonZero(mask_slide_line)
                     if slide_line_nonZero is None:
                         if time.time() - start_time > 0.26:
                             time.sleep(0.15)
-                        #elif time.time() - start_time < 0.125:
+                        # elif time.time() - start_time < 0.125:
                         #    print("SHORT")
                         #    time.sleep(0.125) #0.1
                         else:
-                            time.sleep(0.12) #0.075
+                            time.sleep(0.12)  # 0.075
                         for k in (KEY_LIST_MAIN + KEY_LIST_SECOND):
                             release(k)
                         # time.sleep(0.02)
@@ -158,7 +169,8 @@ def play():
                     if get_mean:
                         get_mean = False
 
-                        mean_x = int((sum(slide_line_nonZero) / len(slide_line_nonZero))[0][0])
+                        mean_x = int((sum(slide_line_nonZero) /
+                                      len(slide_line_nonZero))[0][0])
                         if mean_x <= 280:
                             x = (440, 820)
                         elif mean_x >= 360:
@@ -168,20 +180,26 @@ def play():
 
                     if not two_slide:
                         if not middle_slide:
-                            screen = grab_screen(region=(x[0], 475, x[1], 490))  # 468 500
+                            screen = grab_screen(
+                                region=(x[0], 475, x[1], 490))  # 468 500
                         else:
                             img1 = grab_screen(region=(120, 475, 400, 490))
                             img2 = grab_screen(region=(540, 475, 820, 490))
                             screen = np.concatenate((img1, img2), axis=1)
                         screen = cv2.cvtColor(screen, cv2.COLOR_BGR2HSV)
-                        mask_note = cv2.inRange(screen, NOTE_LOW_RANGE, NOTE_UP_RANGE)
-                        mask_skill = cv2.inRange(screen, SKILL_LOW_RANGE, SKILL_UP_RANGE)
-                        mask_slide = cv2.inRange(screen, SLIDE_LOW_RANGE, SLIDE_UP_RANGE)
-                        mask_flick = cv2.inRange(screen, FLICK_LOW_RANGE, FLICK_UP_RANGE)
+                        mask_note = cv2.inRange(
+                            screen, NOTE_LOW_RANGE, NOTE_UP_RANGE)
+                        mask_skill = cv2.inRange(
+                            screen, SKILL_LOW_RANGE, SKILL_UP_RANGE)
+                        mask_slide = cv2.inRange(
+                            screen, SLIDE_LOW_RANGE, SLIDE_UP_RANGE)
+                        mask_flick = cv2.inRange(
+                            screen, FLICK_LOW_RANGE, FLICK_UP_RANGE)
                         if cv2.findNonZero(mask_note) is not None or cv2.findNonZero(mask_skill) is not None:
                             for k in KEY_LIST_SECOND:
                                 press_and_release(k)
-                            print(Fore.LIGHTCYAN_EX + "NORMAL" + Fore.WHITE + " / " + Fore.LIGHTYELLOW_EX + "SKILL")
+                            print(Fore.LIGHTCYAN_EX + "NORMAL" + Fore.WHITE +
+                                  " / " + Fore.LIGHTYELLOW_EX + "SKILL")
                         if cv2.findNonZero(mask_slide) is not None:
                             for k in KEY_LIST_SECOND:
                                 press(k)
@@ -202,11 +220,11 @@ def play():
 
         # show_screen(False) #show screen
 
-        #FPS_list.append(round(1 / (time.time() - last_time)))
-        #if len(FPS_list) == 250:
+        # FPS_list.append(round(1 / (time.time() - last_time)))
+        # if len(FPS_list) == 250:
         #    print("FPS = {}".format(sum(FPS_list) / len(FPS_list)))
         #    FPS_list = []
-        #last_time = time.time()
+        # last_time = time.time()
 
 
 def is_dead():
@@ -230,22 +248,24 @@ def show_screen(showLine):
 
     if not showLine:
         screen_show = cv2.inRange(screen_show, NOTE_LOW_RANGE, NOTE_UP_RANGE) + \
-                      cv2.inRange(screen_show, SKILL_LOW_RANGE, SKILL_UP_RANGE) + \
-                      cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + \
-                      cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + \
-                      cv2.inRange(screen_show, FLICK_LOW_RANGE, FLICK_UP_RANGE)
+            cv2.inRange(screen_show, SKILL_LOW_RANGE, SKILL_UP_RANGE) + \
+            cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + \
+            cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + \
+            cv2.inRange(screen_show, FLICK_LOW_RANGE, FLICK_UP_RANGE)
     else:
         screen_show = cv2.inRange(screen_show, NOTE_LOW_RANGE, NOTE_UP_RANGE) + \
-                      cv2.inRange(screen_show, SKILL_LOW_RANGE, SKILL_UP_RANGE) + \
-                      cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + \
-                      cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + \
-                      cv2.inRange(screen_show, FLICK_LOW_RANGE, FLICK_UP_RANGE) + \
-                      cv2.inRange(screen_show, SLIDE_LINE_LOW_RANGE, SLIDE_LINE_UP_RANGE)
+            cv2.inRange(screen_show, SKILL_LOW_RANGE, SKILL_UP_RANGE) + \
+            cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + \
+            cv2.inRange(screen_show, SLIDE_LOW_RANGE, SLIDE_UP_RANGE) + \
+            cv2.inRange(screen_show, FLICK_LOW_RANGE, FLICK_UP_RANGE) + \
+            cv2.inRange(screen_show, SLIDE_LINE_LOW_RANGE, SLIDE_LINE_UP_RANGE)
 
     cv2.imshow("BOT GLOBAL GAME VIEW", np.array(screen_show))
     cv2.waitKey(1)
 
+
 played = 0
+
 
 def home_to_game():
     global played
@@ -302,7 +322,8 @@ def home_to_game():
             time.sleep(1)
 
         if song_try_counter == how_much_try:
-            print("The bot did not succeed to full-combo this song after", how_much_try, "times, selecting next song...")
+            print("The bot did not succeed to full-combo this song after", how_much_try,
+                  "times, selecting next song...")
             pyautogui.moveTo(250, 320)
             pyautogui.dragTo(250, 240, duration=1)  # select next song
             song_try_counter = 0
@@ -311,7 +332,6 @@ def home_to_game():
 
         if song_try_counter > 1:
             print("Replaying the same song")
-
 
     elif song_choice_var == 4:
         time.sleep(1)
@@ -332,7 +352,8 @@ def home_to_game():
             time.sleep(1)
 
         if song_try_counter == how_much_try:
-            print("The bot did not succeed to full-perfect this song after", how_much_try, "times, selecting next song...")
+            print("The bot did not succeed to full-perfect this song after", how_much_try,
+                  "times, selecting next song...")
             pyautogui.moveTo(250, 320)
             pyautogui.dragTo(250, 240, duration=1)  # select next song
             song_try_counter = 0
@@ -342,22 +363,18 @@ def home_to_game():
         if song_try_counter > 1:
             print("Replaying the same song")
 
-
     elif song_choice_var == "video":
         if played != 0:
-            if pyautogui.locateOnScreen("fullcombostar.png", region=(351, 267, 28, 28),confidence=0.75) is not None \
-                or pyautogui.locateOnScreen("fullperfectstar.png", region=(351, 267, 28, 28), confidence=0.75) is not None:
+            if pyautogui.locateOnScreen("fullcombostar.png", region=(351, 267, 28, 28), confidence=0.75) is not None \
+                    or pyautogui.locateOnScreen("fullperfectstar.png", region=(351, 267, 28, 28),
+                                                confidence=0.75) is not None:
                 print("This song is already full-comboed, selecting next song...")
                 pyautogui.moveTo(250, 320)
                 pyautogui.dragTo(250, 240, duration=1)  # select next song
                 played = 0
                 time.sleep(1)
-            elif played > 1:
+            elif played > 2:
                 print("Couldn't full-combo this song within 2 tries selecting next one.")
-                pyautogui.moveTo(250, 320)
-                pyautogui.dragTo(250, 240, duration=1)  # select next song
-                played = 0
-                time.sleep(1)
 
     pyautogui.click(730, 510)  # confirm button
     time.sleep(1)
@@ -386,7 +403,8 @@ def gameEnd_to_home():
             press_and_release(k)
             screen = grab_screen(region=(820, 70, 850, 95))
             screen = cv2.cvtColor(screen, cv2.COLOR_BGR2HSV)
-            mask = cv2.inRange(screen, np.array([0, 0, 76]), np.array([0, 0, 79]))
+            mask = cv2.inRange(screen, np.array(
+                [0, 0, 76]), np.array([0, 0, 79]))
             if cv2.findNonZero(mask) is not None:
                 no_live_button = False
                 break
@@ -399,5 +417,4 @@ def gameEnd_to_home():
 
 
 if __name__ == '__main__':
-    press_and_release('p', do_press=False, do_release=False)
     ask_options()
