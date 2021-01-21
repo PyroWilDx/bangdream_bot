@@ -13,7 +13,7 @@ song_choice_var = 2
 song_try_counter = 0
 is_playing_easy = True
 first_time = True
-how_much_try = 5
+how_much_try = 3
 
 
 def ask_options():
