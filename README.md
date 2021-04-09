@@ -3,8 +3,6 @@ This is a Python bot that can help you farm in the game "BanG Dream! Girls Band 
 
 I've made a video of the bot playing : [https://youtu.be/dJgJXFNFZ8E](https://youtu.be/dJgJXFNFZ8E)
 
-[Old video (1st version of the bot) : https://youtu.be/CxnZQtHn5q0](https://youtu.be/CxnZQtHn5q0)
-
 ### REQUIREMENTS :
 1. Python 3.4+ (python libraries requirement : [opencv-python](https://pypi.org/project/opencv-python/); [numpy](https://pypi.org/project/numpy/); [pywin32](https://pypi.org/project/pywin32/); [keyboard](https://pypi.org/project/keyboard/); [pyautogui](https://pypi.org/project/PyAutoGUI/))  
 (If you're new to Python : see how to install it on [this video](https://www.youtube.com/watch?v=bnhQBUEpWlg). After the installation, download the libraries with the command ```pip install library_name``` in the cmd (ex : ```pip install opencv-python```))
